@@ -20,7 +20,7 @@ type APIResponse struct{
 	StatusMessage string `json:statusmessage`
 }
 
-func NewUrlLinkShortnerAPI() *LinkShortnerAPI {
+func NewUrlLinkShortenerAPI() *LinkShortnerAPI {
 	LS := &LinkShortnerAPI{
 		myconnection: NewDBConnection(),
 	}
