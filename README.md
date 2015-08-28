@@ -5,3 +5,5 @@ Once the code is built and running, to create a short url to a long url mapping,
 
 You could then consume a shorturl by issuing a GET request to http://localhost:5100/<the short url>
 The program makes use of the gorilla mux library for routing as well as the mgo library to interface with mongo database
+
+Like this? check my website for more Go articles: www.minaandrawos.com
