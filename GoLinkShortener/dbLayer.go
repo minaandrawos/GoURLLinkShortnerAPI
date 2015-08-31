@@ -39,6 +39,7 @@ func (c *MongoConnection) createLocalConnection() (err error){
 		if urlcollection == nil {
 			err = errors.New("Collection could not be created, maybe need to create it manually")
 		}
+		//This will create a unique index to ensure that there won't be duplicate shorturls in the database.
 		index := mgo.Index{
 			Key: []string{"$text:shorturl"},
 			Unique: true,

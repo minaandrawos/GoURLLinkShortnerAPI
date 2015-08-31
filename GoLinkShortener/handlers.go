@@ -37,6 +37,7 @@ func (Ls *LinkShortnerAPI) UrlCreate(w http.ResponseWriter, r *http.Request){
 	reqBodyStruct := new(UrlMapping)
 	responseEncoder := json.NewEncoder(w)
 	if err := json.NewDecoder(r.Body).Decode(&reqBodyStruct) ; err != nil {
+		w.WriteHeader(http.StatusBadRequest)
 		if err := responseEncoder.Encode(&APIResponse{StatusMessage:err.Error()}); err != nil {
 			fmt.Fprintf(w, "Error occured while processing post request %v \n", err.Error())
 		}
@@ -46,6 +47,7 @@ func (Ls *LinkShortnerAPI) UrlCreate(w http.ResponseWriter, r *http.Request){
 	sUrl := reqBodyStruct.ShortUrl
 	err := Ls.myconnection.AddUrls(lUrl, sUrl)
 	if err != nil {
+		w.WriteHeader(http.StatusConflict)
 		if err := responseEncoder.Encode(&APIResponse{StatusMessage:err.Error()}); err != nil {
 			fmt.Fprintf(w, "Error %s occured while trying to add the url \n", err.Error())
 		}
