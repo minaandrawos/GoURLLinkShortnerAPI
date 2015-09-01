@@ -1,4 +1,5 @@
 package main
+
 import "net/http"
 
 /*
@@ -8,8 +9,8 @@ import "net/http"
 
 	You could then consume a shorturl by issuing a GET request to http://localhost:5100/<the short url>
 	The program makes use of the gorilla mux library for routing as well as the mgo library to interface with mongo database
- */
-func main(){
+*/
+func main() {
 	//Create a new API shortner API
 	LinkShortener := NewUrlLinkShortenerAPI()
 	//Create the needed routes for the API

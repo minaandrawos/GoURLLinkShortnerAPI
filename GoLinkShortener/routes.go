@@ -10,6 +10,7 @@ type Route struct {
 }
 
 type Routes []Route
+
 /*
 	Create the routes for the API. The API supports three URLs:
 		1- GET "/" => Shows a description for the API
@@ -19,9 +20,9 @@ type Routes []Route
 																	longurl:  "original long link"
 																	}
 		 Causes the API to create a mapping between the short url and the long url in the backend database
- */
+*/
 
-func CreateRoutes(LS *LinkShortnerAPI) Routes{
+func CreateRoutes(LS *LinkShortnerAPI) Routes {
 	return Routes{
 		Route{
 			"UrlRoot",
