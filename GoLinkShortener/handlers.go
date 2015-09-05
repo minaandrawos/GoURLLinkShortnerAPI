@@ -43,9 +43,7 @@ func (Ls *LinkShortnerAPI) UrlCreate(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
-	lUrl := reqBodyStruct.LongUrl
-	sUrl := reqBodyStruct.ShortUrl
-	err := Ls.myconnection.AddUrls(lUrl, sUrl)
+	err := Ls.myconnection.AddUrls(reqBodyStruct.LongUrl, reqBodyStruct.ShortUrl)
 	if err != nil {
 		w.WriteHeader(http.StatusConflict)
 		if err := responseEncoder.Encode(&APIResponse{StatusMessage: err.Error()}); err != nil {
@@ -57,9 +55,11 @@ func (Ls *LinkShortnerAPI) UrlCreate(w http.ResponseWriter, r *http.Request) {
 }
 
 func (Ls *LinkShortnerAPI) UrlShow(w http.ResponseWriter, r *http.Request) {
+	//retrieve the variable from the request
 	vars := mux.Vars(r)
 	sUrl := vars["shorturl"]
 	if len(sUrl) > 0 {
+		//find long url that corresponds to the short url
 		lUrl, err := Ls.myconnection.FindlongUrl(sUrl)
 		if err != nil {
 			fmt.Fprintf(w, "Could not find saved long url that corresponds to the short url %s \n", sUrl)

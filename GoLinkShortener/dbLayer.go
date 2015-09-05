@@ -70,7 +70,9 @@ func (c *MongoConnection) getSessionAndCollection() (session *mgo.Session, urlCo
 }
 
 func (c *MongoConnection) FindshortUrl(longurl string) (sUrl string, err error) {
+	//create an empty document struct
 	result := mongoDocument{}
+	//get a copy of the original session and a collection
 	session, urlCollection, err := c.getSessionAndCollection()
 	if err != nil {
 		return
@@ -84,12 +86,15 @@ func (c *MongoConnection) FindshortUrl(longurl string) (sUrl string, err error) 
 }
 
 func (c *MongoConnection) FindlongUrl(shortUrl string) (lUrl string, err error) {
+	//create an empty document struct
 	result := mongoDocument{}
+	//get a copy of the original session and a collection
 	session, urlCollection, err := c.getSessionAndCollection()
 	if err != nil {
 		return
 	}
 	defer session.Close()
+	//Find the shorturl that we need
 	err = urlCollection.Find(bson.M{"shorturl": shortUrl}).One(&result)
 	if err != nil {
 		return
@@ -98,9 +103,11 @@ func (c *MongoConnection) FindlongUrl(shortUrl string) (lUrl string, err error) 
 }
 
 func (c *MongoConnection) AddUrls(longUrl string, shortUrl string) (err error) {
+	//get a copy of the session
 	session, urlCollection, err := c.getSessionAndCollection()
 	if err == nil {
 		defer session.Close()
+		//insert a document with the provided function arguments
 		err = urlCollection.Insert(
 			&mongoDocument{
 				Id:       bson.NewObjectId(),
@@ -109,6 +116,7 @@ func (c *MongoConnection) AddUrls(longUrl string, shortUrl string) (err error) {
 			},
 		)
 		if err != nil {
+			//check if the error is due to duplicate shorturl
 			if mgo.IsDup(err) {
 				err = errors.New("Duplicate name exists for the shorturl")
 			}
