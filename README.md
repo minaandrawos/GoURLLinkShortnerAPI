@@ -1,5 +1,8 @@
 # Go URL Link Shortener API
-A URL Link shortener API code written in Go. The code is provided as-is, the code is for education purposes on how to write an efficient REST API in Go as well as some best practices for interfacing with Mongodb from Go. Future plans is to write a tutorial that covers this code.
+
+Full tutorial could be found at http://www.minaandrawos.com/2015/09/05/link-shortener-golang-web-service-tutorial-mongodb/
+
+A URL Link shortener API code written in Go. The code is provided as-is, the code is for education purposes on how to write an efficient REST API in Go as well as some best practices for interfacing with Mongodb from Go.
 
 The purpose of the API is to shorten url links via a REST HTTP request. 
 Once the code is built and running, to create a short url to a long url mapping, send a POST request to http://localhost:5100/Create, the POST request should include the shortUrl and the longUrl as follows:
